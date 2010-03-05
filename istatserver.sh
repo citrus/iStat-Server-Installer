@@ -46,6 +46,18 @@ install()
     pkg=istatd-$istat_version
     tgz=$pkg.tar.gz
     cfg=/etc/istat.conf
+  
+  
+  
+    if [ -f /usr/lib/libxml2.so ] || [ -f /usr/local/lib/libxml2.so ]; then
+      echo " looks like you've got libxml2-dev installed!"
+    else
+      echo " looks like you don't have libxml2-dev installed. cancelling installation!"
+      exit 0
+    fi
+  
+  
+  
     
     if [ -d /usr/local/src ]; then
       cd /usr/local/src
