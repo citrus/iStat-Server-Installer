@@ -20,4 +20,4 @@ sudo sh ./istatserver.sh install
 
 
 
-
+You might have to add a rule to your iptables too to allow the connection..

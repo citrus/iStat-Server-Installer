@@ -1,0 +1,60 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          istat
+# Description: starts the istat service
+### END INIT INFO
+
+PATH=/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/bin/istatd
+NAME=istat
+DESC=istat
+PID=/var/run/istat/istatd.pid
+
+test -x $DAEMON || exit 0
+
+set -e
+
+istat_start() {
+  if [ -f $PID ]; then
+    echo "$PID exists! $NAME must already be running."
+  else
+    $DAEMON -d
+  fi
+}
+istat_stop() {
+  if [ -f $PID ]; then
+    sudo kill `cat $PID`
+  else
+    echo "$PID not found! $NAME must not be running."
+  fi
+}
+
+
+case "$1" in
+  start)
+        echo -n "Starting $DESC: "
+        istat_start
+        echo "$NAME."
+        ;;
+  stop)
+        echo -n "Stopping $DESC: "
+        istat_stop
+        echo "$NAME."
+        ;;
+
+  restart)
+        echo -n "Restarting $DESC: "
+        istat_stop 
+        sleep 1
+        istat_start
+        echo "$NAME."
+        ;;
+  *)
+        N=/etc/init.d/$NAME
+        echo "Usage: $N {start|stop|restart}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

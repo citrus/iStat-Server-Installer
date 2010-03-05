@@ -1,7 +1,7 @@
 #!/bin/sh
 
 class_name="iStatInstaller"
-version="0.0.2"
+version="0.0.3
 istat_version="0.5.6"
 
 url="http://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
