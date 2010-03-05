@@ -19,5 +19,17 @@ sudo sh ./istatserver.sh install
 
 
 
+----------------------------------------
+
+To add the init.d script: 
+
+  sudo cp etc/istatserver /etc/init.d/istatserver
+  sudo chmod +x /etc/init.d/istatserver
+  sudo update-rc.d istatserver defaults
+
 
 You might have to add a rule to your iptables too to allow the connection..
+
+
+
+
