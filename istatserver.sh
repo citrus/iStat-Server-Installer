@@ -101,7 +101,10 @@ install()
       
       sleep 1
       
-      if [ "$(id istat)" = "id: istat: No such user" ]; then  
+      if id istat > /dev/null 2>&1
+      then
+        echo "iStat user exists!"
+      else
         sudo useradd istat
       fi
       
