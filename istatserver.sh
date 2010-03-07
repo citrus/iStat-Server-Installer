@@ -1,9 +1,9 @@
 #!/bin/sh
 
 class_name="iStatInstaller"
-version="0.0.3
+version="0.0.3"
 istat_version="0.5.6"
-
+override_xml_check="0"
 url="http://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
 
 help()
@@ -15,12 +15,15 @@ iStat Installer!
 ------------------------------------
 
 INSTALLATION:
-  sh ./istatserver.sh install [istat_version]
+  sh ./istatserver.sh [options] install [istat_version]
 
 TASKS
   [install] install
   [-h] help
   [-v] version
+
+OPTIONS
+  [-o] override libxml2 check.
   
 VERSION:
   $class_name $version
@@ -48,14 +51,17 @@ install()
     cfg=/etc/istat.conf
   
   
-  
-    if [ -f /usr/lib/libxml2.so ] || [ -f /usr/local/lib/libxml2.so ]; then
-      echo " looks like you've got libxml2-dev installed!"
-    else
-      echo " looks like you don't have libxml2-dev installed. cancelling installation!"
-      exit 0
+    if [ "$override_xml_check" -eq "0" ]; then
+      if [ -f /usr/lib/libxml2.so ] || [ -f /usr/local/lib/libxml2.so ]; then
+        echo " looks like you've got libxml2-dev installed!"
+        echo " ---"
+        echo " if you've installed libxml2.so somewhere other than /usr/lib/ or /usr/local/lib/"
+        ehco " rerun the install with the -o flag. (sh ./istatserver -o install)"
+      else
+        echo " looks like you don't have libxml2-dev installed. cancelling installation!"
+        exit 0
+      fi
     fi
-  
   
   
     
@@ -84,6 +90,7 @@ install()
     if [ -d $pkg ]; then
       cd $pkg
     else
+      echo "downloaded package could not be found."
       exit 1
     fi
     
@@ -150,39 +157,45 @@ install()
   fi
 }
 
-while [ -n "$1" ]; do
-	case $1 in
-		install)
-		  if [ -n "$2" ]; then
-		    istat_version=$2
-		  fi
-		  install
-		  shift 1
-		  break
-		  ;;
-		-h)
-			help
-			shift 1
-			break
-			;;
-		-v)
-		  echo "$class_name $version"
-		  shift 1
-      exit 0
-		  break
-		  ;;
-		*)
-			echo "error: no such option $1. -h for help";
-		  shift 1
-      break
-			;;
-	esac
-done
- 
-
 if [ -n "$1" ]; then
-  help
-  exit 0
+
+  while [ -n "$1" ]; do
+  	case $1 in
+  		install)
+  		  if [ -n "$2" ]; then
+  		    istat_version="$2"
+  		  fi
+  		  install
+  		  shift 1
+  		  break
+  		  ;;
+  		-o)
+  		  override_xml_check="1"
+  		  shift 1
+  		  ;; 		
+  		-h)
+  			help
+  			shift 1
+  			break
+  			;;
+  		-v)
+  		  echo "$class_name $version"
+  		  shift 1
+        exit 0
+  		  break
+  		  ;;
+  		*)
+  			echo "error: no such option $1. -h for help";
+  		  shift 1
+        break
+  			;;
+  	esac
+  done
+  
+else
+  
+  echo "-h for help!"
+  
 fi
 
 exit 0
