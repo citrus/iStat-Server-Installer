@@ -76,7 +76,7 @@ install()
   echo " downloading $url"
   echo "--------------------------------------"
   
-    sudo wget $url
+    sudo wget --no-check-certificate $url
     
   if [ -f $tgz ]; then
 
