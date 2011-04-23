@@ -2,9 +2,10 @@
 
 class_name="iStatInstaller"
 version="0.0.3"
-istat_version="0.5.6"
+istat_version="0.5.7"
 override_xml_check="0"
-url="http://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
+url="https://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
+
 
 help()
 {
@@ -45,7 +46,6 @@ install()
   echo "--------------------------------------"
   echo " STARTING INSTALLATION!"  
   
-    url="http://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
     pkg=istatd-$istat_version
     tgz=$pkg.tar.gz
     cfg=/etc/istat.conf
@@ -56,7 +56,7 @@ install()
         echo " looks like you've got libxml2-dev installed!"
         echo " ---"
         echo " if you've installed libxml2.so somewhere other than /usr/lib/ or /usr/local/lib/"
-        ehco " rerun the install with the -o flag. (sh ./istatserver -o install)"
+        echo " rerun the install with the -o flag. (sh ./istatserver -o install)"
       else
         echo " looks like you don't have libxml2-dev installed. cancelling installation!"
         exit 0
