@@ -23,11 +23,11 @@ Now edit `istat.conf` to your liking, then run:
 
 ### To add the init.d script:
 
-  cd ~/sources/iStat-Server-Installer # or wherever you cloned to
-  
-  sudo cp etc/istatserver /etc/init.d/istatserver
-  sudo chmod +x /etc/init.d/istatserver
-  sudo update-rc.d istatserver defaults
+    cd ~/sources/iStat-Server-Installer # or wherever you cloned to
+    
+    sudo cp etc/istatserver /etc/init.d/istatserver
+    sudo chmod +x /etc/init.d/istatserver
+    sudo update-rc.d istatserver defaults
 
 
 You'll have to add a rule to your iptables too to allow the connection...
