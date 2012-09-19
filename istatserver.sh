@@ -2,7 +2,7 @@
 
 class_name="iStatInstaller"
 version="0.0.3"
-istat_version="0.5.7"
+istat_version="0.5.8"
 override_xml_check="0"
 url="https://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
 
@@ -52,7 +52,7 @@ install()
   
   
     if [ "$override_xml_check" -eq "0" ]; then
-      if [ -f /usr/lib/libxml2.so ] || [ -f /usr/local/lib/libxml2.so ]; then
+      if [ -f /usr/lib/libxml2.so ] || [ -f /usr/local/lib/libxml2.so ] || [ -f /usr/lib/x86_64-linux-gnu/libxml2.so ]; then
         echo " looks like you've got libxml2-dev installed!"
         echo " ---"
         echo " if you've installed libxml2.so somewhere other than /usr/lib/ or /usr/local/lib/"
