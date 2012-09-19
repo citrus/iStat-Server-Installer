@@ -2,7 +2,7 @@
 
 class_name="iStatInstaller"
 version="0.0.3"
-istat_version="0.5.7"
+istat_version="0.5.8"
 override_xml_check="0"
 url="https://github.com/downloads/tiwilliam/istatd/istatd-$istat_version.tar.gz"
 
